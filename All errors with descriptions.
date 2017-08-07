@@ -1,0 +1,177 @@
+Exact Program...
+
+     1	#include <stdio.h>
+     2	
+     3	int main(void)
+     4	{
+     5		printf("hello, world\n");
+     6		return 0;
+     7	}
+Output
+	hello, world
+
+##################################################################################################
+Error no 1: Missing Closed brace.
+     1	#include <stdio.h>
+     2	
+     3	int main(void)
+     4	{
+     5		printf("hello, world\n");
+     6		return 0;
+     7	
+Compiler Error
+	hello.c: In function ‘main’:
+	hello.c:6:2: error: expected declaration or statement at end of input
+  	return 0;
+  	^
+###################################################################################################
+Error no 2: Missing Starting brace.
+     1	#include <stdio.h>
+     2	
+     3	int main(void)
+     4	
+     5		printf("hello, world\n");
+     6		return 0;
+     7	}
+Compiler Error
+	hello.c: In function ‘main’:
+	hello.c:5:2: error: expected declaration specifiers before ‘printf’
+  	printf("hello, world\n");
+  	^
+	hello.c:6:2: error: expected declaration specifiers before ‘return’
+  	return 0;
+  	^
+	hello.c:7:1: error: expected declaration specifiers before ‘}’ token
+ 	}
+ 	^
+	hello.c:7:1: error: expected ‘{’ at end of input
+####################################################################################################
+Error no 3: Change in Preprocessor directive
+     1	$include <stdio.h>
+     2	
+     3	int main(void)
+     4	{
+     5		printf("hello, world\n");
+     6		return 0;
+     7	}
+Compiler Error
+
+	hello.c:1:10: error: expected ‘=’, ‘,’, ‘;’, ‘asm’ or ‘__attribute__’ before ‘<’ token
+	$include <stdio.h>
+          ^
+#####################################################################################################
+Error no 4: Error in header file.
+     1	#include <stdo.h>
+     2	
+     3	int main(void)
+     4	{
+     5		printf("hello, world\n");
+     6		return 0;
+     7	}
+Compiler Error
+	hello.c:1:18: fatal error: stdo.h: No such file or directory
+	compilation terminated.
+#######################################################################################################
+Error no 5: Main function is missing.
+     1	#include <stdio.h>
+     2	
+     3	int hello(void)
+     4	{
+     5		printf("hello, world\n");
+     6		return 0;
+     7	}
+Compiler Error
+	/usr/lib/gcc/x86_64-linux-gnu/5/../../../x86_64-linux-gnu/crt1.o: In function `_start':
+	(.text+0x20): undefined reference to `main'
+	collect2: error: ld returned 1 exit status
+#######################################################################################################
+Error no 6: A semicolon is missing.
+     1	#include <stdio.h>
+     2	
+     3	int main (void)
+     4	{
+     5		printf("hello, world\n");
+     6		return 0
+     7	}
+Compiler Error
+	hello.c: In function ‘main’:
+	hello.c:7:1: error: expected ‘;’ before ‘}’ token
+ 	}
+ 	^
+########################################################################################################
+Error no 7: Library Function printf() Error
+     1	#include <stdio.h>
+       
+     2	int main (void)
+     3	{
+     4		prinf("hello, world\n");
+     5		return 0;
+     6	}
+Compiler Error
+	hello.c: In function ‘main’:
+	hello.c:5:2: warning: implicit declaration of function ‘prinf’ [-Wimplicit-function-declaration]
+  	prinf("hello, world\n");
+  	^
+	/tmp/ccdtJroW.o: In function `main':
+	hello.c:(.text+0xf): undefined reference to `prinf'
+	collect2: error: ld returned 1 exit status
+#########################################################################################################
+Error no 8: Missing header file definition
+     1	
+     2	int main(void)
+     3	{
+     4		printf("hello, world\n");
+     5		return 0;
+     6	}
+Compilation Error
+	test.c: In function ‘main’:
+	test.c:4:2: warning: implicit declaration of function ‘printf’ [-Wimplicit-function-declaration]
+	printf("hello, world\n");
+	^
+###########################################################################################################
+Error no 9: Header file in (--).
+     1	#include (stdio.h)
+     2	int main(void)
+     3	{
+     4		printf("hello, world\n");
+     5		return 0;
+     6	}
+Compiler Error
+	test.c:1:10: error: #include expects "FILENAME" or <FILENAME>
+ 	#include (stdio.h)
+ 	         ^
+	test.c: In function ‘main’:
+	test.c:4:2: warning: implicit declaration of function ‘printf’ [-Wimplicit-function-declaration]
+  	printf("hello, world\n");
+  	^
+	test.c:4:2: warning: incompatible implicit declaration of built-in function ‘printf’
+	test.c:4:2: note: include ‘<stdio.h>’ or provide a declaration of ‘printf’
+#############################################################################################################
+Error 10: Braces..
+     1	#include <stdio.h>
+     2	int main<void>
+     3	{
+     4		printf("hello, world\n");
+     5		return 0;
+     6	}
+Compiler Error
+	test.c:2:9: error: expected ‘=’, ‘,’, ‘;’, ‘asm’ or ‘__attribute__’ before ‘<’ token
+ 	int main<void>
+    	     ^
+##############################################################################################################
+Error 11: Braces...
+     1	#include <stdio.h>
+     2	int main(void)
+     3	{
+     4		printf<"hello, world\n">;
+     5		return 0;
+     6	}
+Compiler Error
+	test.c: In function ‘main’:
+	test.c:4:8: warning: comparison of distinct pointer types lacks a cast
+	printf<"hello, world\n">;
+	        ^
+	test.c:4:26: error: expected expression before ‘;’ token
+	  	printf<"hello, world\n">;
+                          ^
+##############################################################################################################
